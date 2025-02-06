@@ -1,0 +1,5 @@
+<form [formGroup]="formularioDocumento">
+    <label for="ide" class="form-label">{{tipoID}}</label>
+    <input [ngClass]="{'is-invalid': hasErrors('ide','required')}" type="text" class="form-control" id="ide" formControlName="ide">
+    <div class="text-danger" *ngIf="hasErrors('ide', 'minlength')">{{tipoID}}</div>
+</form>
