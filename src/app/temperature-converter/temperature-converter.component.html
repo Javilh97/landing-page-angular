@@ -2,25 +2,37 @@
     <h1>Conversor de temperatura</h1>
     <mat-card>
         <mat-card-content>
-            <form action="" [formGroup]="validForm" (ngSubmit)="submit()" >
+            <form action="" [formGroup]="validForm" (ngSubmit)="submit()">
                 <mat-form-field class="example-form-field">
                     <mat-label>Temperatura</mat-label>
-                    <input matInput type="text" [(ngModel)]="value">
-                    @if (value) {
-                        <button matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    }
+                    <input matInput type="text" formControlName="valor">
+                    <button matSuffix mat-icon-button aria-label="Clear">
+                        <!-- <mat-icon>close</mat-icon> -->
+                    </button>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field class="ms-3">
                     <mat-label>De</mat-label>
-                    <mat-select>
+                    <mat-select formControlName="de" >
                         @for (item of temperaturas; track $index) {
-                            <mat-option [value]="item.value">{{item.viewValue}}</mat-option>
+                        <mat-option [value]="item.value">{{item.viewValue}}</mat-option>
                         }
                     </mat-select>
                 </mat-form-field>
+                <mat-form-field class="ms-3">
+                    <mat-label>A</mat-label>
+                    <mat-select formControlName="a" >
+                        @for (item of temperaturas; track $index) {
+                        <mat-option [value]="item.value">{{item.viewValue}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <mat-label class="ms-5" >{{result}}</mat-label>
+                <div>
+                    <button id="buttonConver" mat-raised-button color="primary" type="submit">Covertir</button>
+                </div>
             </form>
+
+
         </mat-card-content>
     </mat-card>
 </div>
