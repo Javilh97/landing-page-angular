@@ -1,0 +1,51 @@
+<div class="row mt-4">
+    <div class="col-1 mx-3">
+        <div class="example-button-row mb-3">
+            <button mat-raised-button (click)="graficoBarra()">Barra</button>
+        </div>
+        <div class="example-button-row mb-3">
+            <button mat-raised-button (click)="graficoLinea()">Linea</button>
+        </div>
+        <div class="example-button-row">
+            <button mat-raised-button (click)="graficoPie()">Pie</button>
+        </div>
+    </div>
+    @if (barra) {
+        <div class="col-10">
+            <div class="container" >
+                <apx-chart
+                  [series]="barChartOptions.series"
+                  [chart]="barChartOptions.chart"
+                  [xaxis]="barChartOptions.xaxis"
+                  [yaxis]="barChartOptions.yaxis"
+                  [title]="barChartOptions.title"
+                ></apx-chart>
+            </div>
+        </div>
+    } @else if (linea){
+        <div class="col-10">
+            <div class="container">
+                <apx-chart #grafico
+                [series]="lineChartOptions.series"
+                [chart]="lineChartOptions.chart"
+                [xaxis]="lineChartOptions.xaxis"
+                [title]="lineChartOptions.title"></apx-chart>
+            </div>
+        </div>
+
+    } @else if(pie){
+        <div class="col-10">
+            <div class="container">
+                <apx-chart #grafico
+                [series]="pieChartOptions.series"
+                [chart]="pieChartOptions.chart"
+                
+                [title]="pieChartOptions.title"
+                
+                ></apx-chart>
+
+            </div>
+        </div>
+    }
+</div>
+
