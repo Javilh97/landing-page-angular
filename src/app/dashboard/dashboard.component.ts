@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import ApexCharts from 'apexcharts';
 import { ApexAxisChartSeries, ApexChart, ApexTitleSubtitle, ApexXAxis, ChartComponent, NgApexchartsModule } from 'ng-apexcharts';
+import { NavigationComponent } from '../navigation/navigation.component';
 
 export type barChartOptions = {
   series: ApexAxisChartSeries | any;
@@ -39,7 +40,7 @@ export interface Tile {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NgApexchartsModule, MatButtonModule, MatGridListModule,],
+  imports: [NgApexchartsModule, MatButtonModule, MatGridListModule, NavigationComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
