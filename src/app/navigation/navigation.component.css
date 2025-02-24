@@ -4,6 +4,8 @@
 
 .sidenav {
   width: 200px;
+  color: aliceblue;
+  /* background-color: #38071c; */
 }
 
 .sidenav .mat-toolbar {
@@ -14,4 +16,8 @@
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+mat-toolbar{
+  background-color: #38071c;
 }
