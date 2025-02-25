@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,7 +26,7 @@ Chart.register(ArcElement, CategoryScale, Tooltip, Legend, Title, PieController,
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    
+    CommonModule
   ]
 })
 export class Dashboard1Component implements AfterViewInit {
@@ -39,18 +39,18 @@ export class Dashboard1Component implements AfterViewInit {
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Concesiones por región', cols: 1, rows: 1, chartId: 'grafico1', chartType: 'bar', data: this.getBarChartData() },
-          { title: 'Concesiones bloqueadas por area', cols: 1, rows: 1, chartId: 'grafico2', chartType: 'line', data: this.getLineChartData() },
-          { title: 'Conceciones totales', cols: 1, rows: 1, chartId: 'grafico3', chartType: 'pie', data: this.getPieChartData() },
-          { title: 'Concesiones por genero', cols: 1, rows: 1, chartId: 'grafico4', chartType: 'doughnut', data: this.getDoughnutChartData() }
+          { title: 'Conceciones totales', cols: 1, rows: 1, chartId: 'grafico3', chartType: 'pie', data: this.getPieChartData(), gradient: 'linear-gradient(135deg, #ff9a9e, #fad0c4)' },
+          { title: 'Concesiones por región', cols: 1, rows: 1, chartId: 'grafico1', chartType: 'bar', data: this.getBarChartData(), gradient: 'linear-gradient(135deg, #89f7fe, #66a6ff)' },
+          { title: 'Concesiones bloqueadas por area', cols: 1, rows: 1, chartId: 'grafico2', chartType: 'line', data: this.getLineChartData(), gradient: 'linear-gradient(135deg, #fdfbfb, #ebedee)' },
+          { title: 'Concesiones por genero', cols: 1, rows: 1, chartId: 'grafico4', chartType: 'doughnut', data: this.getDoughnutChartData(), gradient: 'linear-gradient(135deg, #f6d365, #fda085)' }
         ];
       }
 
       return [
-        { title: 'Concesiones por región', cols: 2, rows: 1, chartId: 'grafico1', chartType: 'bar', data: this.getBarChartData() },
-        { title: 'Concesiones bloqueadas por area', cols: 1, rows: 1, chartId: 'grafico2', chartType: 'line', data: this.getLineChartData() },
-        { title: 'Concesiones totales', cols: 1, rows: 2, chartId: 'grafico3', chartType: 'pie', data: this.getPieChartData() },
-        { title: 'Concesiones por genero', cols: 1, rows: 1, chartId: 'grafico4', chartType: 'doughnut', data: this.getDoughnutChartData() }
+        { title: 'Concesiones totales', cols: 1, rows: 1, chartId: 'grafico3', chartType: 'pie', data: this.getPieChartData(), gradient: 'linear-gradient(135deg, #ff9a9e, #fad0c4)' },
+        { title: 'Concesiones por región', cols: 2, rows: 1, chartId: 'grafico1', chartType: 'bar', data: this.getBarChartData(), gradient: 'linear-gradient(135deg, #89f7fe, #66a6ff)' },
+        { title: 'Concesiones bloqueadas por area', cols: 2, rows: 1, chartId: 'grafico2', chartType: 'line', data: this.getLineChartData(), gradient: 'linear-gradient(135deg, #fdfbfb, #ebedee)' },
+        { title: 'Concesiones por genero', cols: 1, rows: 1, chartId: 'grafico4', chartType: 'doughnut', data: this.getDoughnutChartData(), gradient: 'linear-gradient(135deg, #f6d365, #fda085)' }
       ];
     })
   );
@@ -58,7 +58,7 @@ export class Dashboard1Component implements AfterViewInit {
   
   private initChart(chartId: string, chartType: any, chartData: any) {
     const ctx = document.getElementById(chartId) as HTMLCanvasElement;
-
+    if(!ctx) return;
     // const data = {
     //   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     //   datasets: [{
@@ -68,15 +68,21 @@ export class Dashboard1Component implements AfterViewInit {
     //   }]
     // };
 
+
+
     const chart = new Chart(ctx, {
       type: chartType, // Recibe el tipo de grafico desde el array de cards.
       data: chartData, // Recibe la informacion correspondiente a cada card
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             position: 'top'
           }
+        },
+        layout: {
+          padding: 10
         }
       }
     });
@@ -92,6 +98,7 @@ export class Dashboard1Component implements AfterViewInit {
   }
 
   // Funciones para cargar los datos a cada grafico
+  // Grafico de tipo pastel
   getPieChartData() {
     return {
       labels: ['Bloqueadas', 'Activas'],
@@ -102,7 +109,7 @@ export class Dashboard1Component implements AfterViewInit {
       }]
     };
   }
-
+  //Grafico de lineas
   getLineChartData() {
     return {
       labels: ['January', 'February', 'March', 'April', 'May', 'June'],
@@ -115,7 +122,7 @@ export class Dashboard1Component implements AfterViewInit {
       }]
     };
   }
-
+  //Grafico de barras
   getBarChartData() {
     return {
       labels: ['Cañada', 'Mixteca', 'Valles Centrales', 'Costa', 'Sierra Norte', 'Sierra Sur', 'Istmo', 'Papaloapan'],
@@ -128,7 +135,7 @@ export class Dashboard1Component implements AfterViewInit {
       }]
     };
   }
-
+  //Grafico de tipo dona
   getDoughnutChartData() {
     return {
       labels: ['Hombre', 'Mujer'],
