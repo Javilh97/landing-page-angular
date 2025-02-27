@@ -39,10 +39,10 @@ export class Dashboard1Component implements AfterViewInit {
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Conceciones totales', cols: 1, rows: 1, chartId: 'grafico3', chartType: 'pie', data: this.getPieChartData(), gradient: 'linear-gradient(135deg, #ff9a9e, #fad0c4)' },
-          { title: 'Concesiones por región', cols: 1, rows: 1, chartId: 'grafico1', chartType: 'bar', data: this.getBarChartData(), gradient: 'linear-gradient(135deg, #89f7fe, #66a6ff)' },
-          { title: 'Concesiones bloqueadas por area', cols: 1, rows: 1, chartId: 'grafico2', chartType: 'line', data: this.getLineChartData(), gradient: 'linear-gradient(135deg, #fdfbfb, #ebedee)' },
-          { title: 'Concesiones por genero', cols: 1, rows: 1, chartId: 'grafico4', chartType: 'doughnut', data: this.getDoughnutChartData(), gradient: 'linear-gradient(135deg, #f6d365, #fda085)' }
+          { title: 'Conceciones totales', cols: 3, rows: 1, chartId: 'grafico3', chartType: 'pie', data: this.getPieChartData(), gradient: 'linear-gradient(135deg, #ff9a9e, #fad0c4)' },
+          { title: 'Concesiones por región', cols: 3, rows: 1, chartId: 'grafico1', chartType: 'bar', data: this.getBarChartData(), gradient: 'linear-gradient(135deg, #89f7fe, #66a6ff)' },
+          { title: 'Concesiones bloqueadas por area', cols: 3, rows: 1, chartId: 'grafico2', chartType: 'line', data: this.getLineChartData(), gradient: 'linear-gradient(135deg, #fdfbfb, #ebedee)' },
+          { title: 'Concesiones por genero', cols: 3, rows: 1, chartId: 'grafico4', chartType: 'doughnut', data: this.getDoughnutChartData(), gradient: 'linear-gradient(135deg, #f6d365, #fda085)' }
         ];
       }
 
@@ -150,6 +150,18 @@ export class Dashboard1Component implements AfterViewInit {
         borderWidth: 1
       }]
     };
+  }
+
+  expandCard(card: any){
+    card.cols = card.cols === 2 ? 1 : 2;
+    card.rows = card.rows === 2 ? 1 : 2;
+    
+  }
+
+  removeCard(card: any){
+    this.cards = this.cards.pipe(
+      map(cards => cards.filter(c => c !== card))
+    )
   }
 
 }

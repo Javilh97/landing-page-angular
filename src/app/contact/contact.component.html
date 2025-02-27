@@ -65,3 +65,90 @@
     </form>
 
 </div>
+
+<form [formGroup]="tramiteForm" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="outline">
+      <mat-label>Número de Serie</mat-label>
+      <input matInput formControlName="numeroSerie" required>
+    </mat-form-field>
+  
+    <h3>Datos del Contribuyente</h3>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="contribuyente.nombre" required>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido Paterno</mat-label>
+      <input matInput formControlName="contribuyente.apellidoPaterno" required>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido Materno</mat-label>
+      <input matInput formControlName="contribuyente.apellidoMaterno">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Razón Social</mat-label>
+      <input matInput formControlName="contribuyente.razonSocial">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>RFC</mat-label>
+      <input matInput formControlName="contribuyente.rfc" required>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo de Persona</mat-label>
+      <mat-select formControlName="contribuyente.tipoPersona" required>
+        <mat-option value="fisica">Física</mat-option>
+        <mat-option value="moral">Moral</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <h3>Datos del Representante</h3>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="representante.nombre" required>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido Paterno</mat-label>
+      <input matInput formControlName="representante.apellidoPaterno" required>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Apellido Materno</mat-label>
+      <input matInput formControlName="representante.apellidoMaterno">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo de Persona</mat-label>
+      <mat-select formControlName="representante.tipoPersona">
+        <mat-option value="fisica">Física</mat-option>
+        <mat-option value="moral">Moral</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de Elaboración</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fechaElaboracion" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo de Trámite</mat-label>
+      <mat-select formControlName="tipoTramite" required>
+        <mat-option *ngFor="let tipo of tiposTramite" [value]="tipo">{{ tipo }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Subir Archivo PDF</mat-label>
+      <input type="file" (change)="onFileChange($event)" accept="application/pdf">
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Enviar</button>
+  </form>
+  

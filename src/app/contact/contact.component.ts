@@ -2,11 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DniComponent } from './dni/dni.component';
+import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatOption } from '@angular/material/core';
+import {MatDatepicker, MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepicker';
+import { MatInput, MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, DniComponent],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, DniComponent, MatFormField, MatLabel, MatOption, MatDatepicker, MatDatepickerToggle, MatInput, MatFormField, MatInputModule, MatFormFieldModule, MatDatepickerModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
@@ -18,6 +22,9 @@ export class ContactComponent implements OnInit, OnDestroy {
   //   password: ''
   // }
 
+  tramiteForm: FormGroup;
+  tiposTramite = ['Alta', 'Baja', 'Modificación'];
+
   formularioContacto: FormGroup;
   tipoID: string = 'Identificación';
   //Objeto para mostrar datos estaticos en el formulario
@@ -27,8 +34,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   //   phone: '95136985214'
   // };
 
-  constructor(private form: FormBuilder){
-    this.formularioContacto = this.form.group({
+  constructor(private fb: FormBuilder){
+    this.formularioContacto = this.fb.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       tipoID: [''],
@@ -36,6 +43,27 @@ export class ContactComponent implements OnInit, OnDestroy {
       phone: ['', [Validators.required, Validators.minLength(10)]],
       email: ['', [Validators.required , Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
+    });
+
+    this.tramiteForm = this.fb.group({
+      numeroSerie: ['', Validators.required],
+      contribuyente: this.fb.group({
+        nombre: ['', Validators.required],
+        apellidoPaterno: ['', Validators.required],
+        apellidoMaterno: [''],
+        razonSocial: [''],
+        rfc: ['', [Validators.required, Validators.pattern('^[A-Z0-9]{12,13}$')]],
+        tipoPersona: ['', Validators.required]
+      }),
+      representante: this.fb.group({
+        nombre: ['', Validators.required],
+        apellidoPaterno: ['', Validators.required],
+        apellidoMaterno: [''],
+        tipoPersona: ['']
+      }),
+      fechaElaboracion: ['', Validators.required],
+      tipoTramite: ['', Validators.required],
+      archivoPdf: [null, Validators.required]
     });
   }
 
@@ -74,4 +102,22 @@ export class ContactComponent implements OnInit, OnDestroy {
     console.log(this.formularioContacto);
   }
 
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.tramiteForm.patchValue({ archivoPdf: file });
+    }
+  }
+
+  submitForm() {
+    if (this.tramiteForm.valid) {
+      console.log('Formulario enviado:', this.tramiteForm.value);
+    } else {
+      console.log('Formulario inválido');
+    }
+  }
+
 }
+
+
+
