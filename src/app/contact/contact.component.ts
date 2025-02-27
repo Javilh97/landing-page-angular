@@ -120,4 +120,86 @@ export class ContactComponent implements OnInit, OnDestroy {
 }
 
 
+// Creame un formulario con angular y angular material donde se puedan ingresar los siguientes datos,
+// toma en cuenta que cada campo esta representado con un guion
+
+//  - Numero de serie
+// Datos del contribuyente
+//  - nombre
+//  - apellido paterno
+//  - apellido materno (opcional)
+//  - razon social(null si es persona fisica)
+//  - rfc
+//  - tipo de persona (fisica o moral)
+
+// Datos del representante
+//  - nombre
+//  - apellido paterno
+//  - apellido materno (opcional)
+//  - tipo de persona (opcional)
+
+//  - Date picker para selecionar fecha de elaboracion
+
+//  - select para tipo de tramite
+
+//  - input de tipo file para subir el archivo pdf
+
+
+// ////////////////////////////////////////// endpoints para recapo //////////////////////////////////////
+// url base = http://172.80.13.12:8080/api/
+
+// ###### tipos de tramite
+
+// {
+//   "GET api/tipo_tramite/{id}": "Busca tipos de tramite por id.",
+//   "GET api/tipo_tramite": "Listado de tipos de tramite",
+//   "POST api/tipo_tramite": "Crea un tipo de tramite, la informacion se manda en el body",
+//   "PUT api/tipo_tramite/{id}": "Activa/desactiva un tipo de tramite"
+// }
+
+// ###### Contribuyente
+
+// {
+//   "GET api/contribuyente": "Listado de todos los contribuyentes",
+//   "GET api/contribuyente/{id}": "Busca contribuyente por id.",
+//   "POST api/contribuyente": "Crea un contribuyente, la informacion se manda en el body"
+// }
+
+// ###### Representante
+
+// {
+//   "GET api/representante": "Listado de todos los representantes",
+//   "POST api/representante": "Crea un representante, la informacion se manda en el body",
+//   "GET api/representante/{id}": "Busca representante por id."
+// }
+
+// ###### Carta Poder
+
+// {
+//   "GET api/cartaPoder/f/id_file": "Listado de la cartas poder por id del file",
+//   "POST api/cartaPoder": "Crea una carta poder, la informacion se manda en el body",
+//   "GET api/cartaPoder/{id}": "Busca una carta poder por id.",
+//   "GET api/cartaPoder": "Listado de todas las cartas poder"
+// }
+
+// ###### Archivos
+
+// {
+//   "GET api/file/s/{id_serie}": "Busca por el id de serie",
+//   "POST api/file/upload": "Crea un registro file",
+//   "GET api/file/{id}": "Busca file por id.",
+//   "GET api/file/download/{id}": "visualizar archivo",
+//   "GET api/file/report": "reporte personalizado"
+// }
+
+// ###### Series
+
+// {
+//   "POST api/series": "Crea un numero de Serie",
+//   "GET api/series/s/{serie}": "Busca por series",
+//   "GET api/series/{id}": "Busca series por id."
+// }
+
+
+
 
